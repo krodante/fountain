@@ -20,8 +20,12 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'pry'
   gem 'rspec-rails', '~> 3.8'
+end
+
+group :test do
 end
 
 group :development do
