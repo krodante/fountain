@@ -15,8 +15,10 @@ ActiveRecord::Schema.define(version: 2019_02_07_212719) do
   create_table "applicants", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_applicants_on_user_id", unique: true
   end
 
   create_table "applications", force: :cascade do |t|
@@ -29,8 +31,10 @@ ActiveRecord::Schema.define(version: 2019_02_07_212719) do
 
   create_table "employers", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_employers_on_user_id", unique: true
   end
 
   create_table "jobs", force: :cascade do |t|
