@@ -8,10 +8,10 @@ class JobsController < ApplicationController
   end
 
   def apply
-    user = User.find(params[:user_id])
-
-    Application.create(applicant_id: user.applicant.id, job_id: params[:job_id])
-    redirect_to applicant_path(user.id)
+    job = Job.find(params[:job_id])
+    Application.create(applicant_id: current_user.applicant.id, job_id: job.id)
+    flash[:success] = "You applied to the #{job.title} position!"
+    redirect_to applicant_path(current_user.id)
   end
 
   def new
@@ -20,15 +20,13 @@ class JobsController < ApplicationController
   end
 
   def create
-    employer = Employer.find(params[:employer_id].to_i)
-    
-    job = Job.create(
+    Job.create(
       title: job_params[:title],
       description: job_params[:description],
-      employer_id: employer.id
+      employer_id: current_user.employer.id
     )
 
-    redirect_to employer_path(employer.user.id)
+    redirect_to employer_path(current_user.id)
   end
 
   private

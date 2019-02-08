@@ -20,7 +20,7 @@
             <td><%= job.title %></td>
             <td><%= job.description %></td>
             <td><%= 
-              link_to_unless @employer || (@applicant && Application.find_by(applicant_id: @applicant.id, job_id: job.id)), 'Apply', apply_path(job_id: job.id, user_id: current_user.id), method: :post %>
+              link_to_unless @employer || (@applicant && Application.find_by(applicant_id: @applicant.id, job_id: job.id)), 'Apply', apply_path(job_id: job.id), method: :post %>
             </td>
           </tr>
         </tbody>

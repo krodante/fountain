@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe JobsController, type: :controller do
   render_views
 
+  let(:applicant_user) { create(:user, role: 'applicant') }
+  let(:employer_user) { create(:user, role: 'employer') }
+
+  before do
+    create(:job)
+    create(:employer, user: employer_user)
+    create(:applicant, user: applicant_user)
+  end
+
   describe 'GET #index' do
     it 'ensures that a user has logged in' do
       get :index
@@ -11,15 +20,6 @@ RSpec.describe JobsController, type: :controller do
     end
 
     context 'when a user is logged in' do
-      let(:applicant_user) { create(:user, role: 'applicant') }
-      let(:employer_user) { create(:user, role: 'employer') }
-
-      before do
-        create(:job)
-        create(:employer, user: employer_user)
-        create(:applicant, user: applicant_user)
-      end
-
       it 'shows the Apply link for applicants' do
         sign_in(applicant_user)
 
@@ -35,6 +35,26 @@ RSpec.describe JobsController, type: :controller do
 
         expect(response.body).to include('<td>Apply')
       end
+    end
+  end
+
+  describe 'POST #apply' do
+    it 'creates an application record' do
+      new_job = create(:job)
+      sign_in(applicant_user)
+
+      post :apply, params: { job_id: new_job.id }
+
+      expect(flash[:success]).to include(new_job.title)
+    end
+  end
+
+  describe 'POST #create' do
+    it 'creates a job for a given employer' do
+      sign_in(employer_user)
+      post :create, params: { employer_id: employer_user.employer.id, job: { title: 'Fun Job', description: 'So super fun!' } }
+
+      expect(response).to redirect_to(employer_path(employer_user.id))
     end
   end
 
