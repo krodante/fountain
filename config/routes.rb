@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
-  get '/', to: 'jobs#index'
-  resources :applicants, only: ['show']
+  get '/', to: 'welcome#index'
+  get '/jobs', to: 'jobs#index'
+  post 'apply', to: 'jobs#apply'
+  resources :applicants, only: [:show, :new, :create]
+  resources :employers, only: [:show, :new, :create] do
+    resources :jobs
+  end
 end

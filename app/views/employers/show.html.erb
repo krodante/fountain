@@ -1,0 +1,55 @@
+<div>
+  <% if @applications.empty? %>
+    You have no pending applications.
+  <% else %>
+  <h2>Applicants</h2>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>Date Applied</th>
+          <th scope='col'>Job Title</th>
+          <th scope='col'>Applicant Name</th>
+        </tr>
+      </thead>
+      <% @applications.each do |application| %>
+        <tbody>
+          <tr>
+            <td><%= application.created_at %></td>
+            <td><%= application.job.title %></td>
+            <td><%= application.applicant.first_name %> <%= application.applicant.last_name %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
+</div>
+
+<div>
+  <h2>Jobs</h2>
+  <% if @jobs.empty? %>
+    <%= link_to 'Create', new_employer_job_path(@employer) %> more jobs!
+  <% else %>
+    <div>
+      <%= link_to 'Create Job', new_employer_job_path(@employer) %>
+    </div>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>Created At</th>
+          <th scope='col'>Title</th>
+          <th scope='col'>Description</th>
+        </tr>
+      </thead>
+      <% @jobs.each do |job| %>
+        <tbody>
+          <tr>
+            <td><%= job.created_at %></td>
+            <td><%= job.title %></td>
+            <td><%= job.description %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
+  
+</div>

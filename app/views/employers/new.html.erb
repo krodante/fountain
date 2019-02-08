@@ -1,0 +1,14 @@
+<h2>Create Employer User</h2>
+
+<%= form_for :employer, url: { action: "create" }  do |f| %>
+  <%= f.hidden_field(:user_id, value: @user_id) %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+<% end %>

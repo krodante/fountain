@@ -14,6 +14,7 @@ gem 'rubocop'
 gem 'sass-rails', '~> 5.0'
 gem 'sqlite3', '~> 1.3.6'
 gem 'turbolinks', '~> 5'
+gem "twitter-bootstrap-rails"
 gem 'uglifier', '>= 1.3.0'
 
 # Use ActiveModel has_secure_password
@@ -23,10 +24,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'pry'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.8'
-end
-
-group :test do
 end
 
 group :development do

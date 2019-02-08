@@ -4,9 +4,4 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     user { create(:user) }
   end
-
-  factory :application do
-    applicant
-    job
-  end
 end

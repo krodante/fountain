@@ -1,1 +1,27 @@
-Hi!
+<h2>Applications</h2>
+<% if @applications.empty? %>
+  You haven't submitted any applications. Check out the <%= link_to 'jobs', jobs_path %> page to find your next role!
+<% else %>
+  Check out the <%= link_to 'jobs', jobs_path %> page to apply to more roles!
+  <table class='table'>
+    <thead>
+        <tr>
+          <th scope='col'>Date Applied</th>
+          <th scope='col'>Company</th>
+          <th scope='col'>Title</th>
+          <th scope='col'>Description</th>
+        </tr>
+      </thead>
+    <% @applications.each do |application| %>
+      <tbody>
+        <tr>
+          <td><%= application.created_at %></td>
+          <td><%= application.job.employer.name %></td>
+          <td><%= application.job.title %></td>
+          <td><%= application.job.description %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% end %>
+
