@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe ApplicantsController, type: :controller do
+RSpec.describe(ApplicantsController, type: :controller) do
   describe 'GET #show' do
     context 'for an applicant user' do
       let(:applicant) { create(:applicant) }
       let(:user) { User.find(applicant.user_id) }
-      before { sign_in_as user}
+      before { sign_in_as user }
 
       it 'shows the appropriate platform' do
-        expect(controller.after_sign_in_path_for(user)).to eq applicant_path(applicant.id)
+        expect(controller.after_sign_in_path_for(user)).to eq(applicant_path(applicant.id))
       end
 
       context 'applicant has not submitted any applications' do
@@ -33,7 +33,7 @@ RSpec.describe ApplicantsController, type: :controller do
     context 'for an employer user' do
       let(:employer) { create(:employer) }
       let(:employer_user) { User.find(employer.user_id) }
-      before { sign_in_as employer_user}
+      before { sign_in_as employer_user }
 
       it 'redirects and shows an error' do
         get :show, params: { id: employer_user.id }

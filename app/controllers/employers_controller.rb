@@ -13,7 +13,7 @@ class EmployersController < ApplicationController
 
   def create
     Employer.create(employer_params)
-    redirect_to employer_path(employer_params[:user_id]) 
+    redirect_to employer_path(employer_params[:user_id])
   end
 
   private

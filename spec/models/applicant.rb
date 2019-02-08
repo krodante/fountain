@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Applicant, type: :model do
+RSpec.describe(Applicant, type: :model) do
   it "has a valid factory" do
     expect(build(:applicant)).to be_valid
   end
 
   let(:applicant) { build(:applicant) }
-  
+
   describe "ActiveModel validations" do
     it { expect(applicant).to validate_presence_of(:first_name) }
     it { expect(applicant).to validate_presence_of(:last_name) }

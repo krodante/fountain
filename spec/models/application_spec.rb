@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Application, type: :model do
+RSpec.describe(Application, type: :model) do
   it "has a valid factory" do
     expect(build(:application)).to be_valid
   end
 
   let(:application) { build(:application) }
-  
+
   describe "ActiveModel validations" do
     it { expect(application).to validate_presence_of(:applicant_id) }
     it { expect(application).to validate_presence_of(:job_id) }

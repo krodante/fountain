@@ -3,7 +3,7 @@ class ApplicantsController < ApplicationController
 
   def show
     applicant = Applicant.find_by(user_id: current_user.id)
-    @applications = applicant.applications    
+    @applications = applicant.applications
   end
 
   def new
@@ -12,7 +12,7 @@ class ApplicantsController < ApplicationController
 
   def create
     Applicant.create(applicant_params)
-    redirect_to applicant_path(current_user.id) 
+    redirect_to applicant_path(current_user.id)
   end
 
   private

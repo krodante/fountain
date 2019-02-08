@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe EmployersController, type: :controller do
+RSpec.describe(EmployersController, type: :controller) do
   describe 'GET #show' do
     let(:job) { create(:job, employer: employer) }
     let(:applicant) { create(:applicant) }
@@ -8,10 +8,10 @@ RSpec.describe EmployersController, type: :controller do
     context 'for an employer user' do
       let(:user) { create(:user, role: 'employer') }
       let(:employer) { create(:employer, user: user) }
-      before { sign_in_as user}
+      before { sign_in_as user }
 
       it 'shows the appropriate platform' do
-        expect(controller.after_sign_in_path_for(user)).to eq employer_path(employer.id)
+        expect(controller.after_sign_in_path_for(user)).to eq(employer_path(employer.id))
       end
 
       context 'employer has posted any jobs' do
@@ -44,7 +44,7 @@ RSpec.describe EmployersController, type: :controller do
 
     context 'for an applicant user' do
       let(:applicant_user) { User.find(applicant.user_id) }
-      before { sign_in_as applicant_user}
+      before { sign_in_as applicant_user }
 
       it 'redirects and shows an error' do
         get :show, params: { id: applicant_user.id }

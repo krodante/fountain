@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe JobsController, type: :controller do
+RSpec.describe(JobsController, type: :controller) do
   let(:applicant_user) { create(:user, role: 'applicant') }
   let(:employer_user) { create(:user, role: 'employer') }
 
@@ -50,7 +50,12 @@ RSpec.describe JobsController, type: :controller do
   describe 'POST #create' do
     it 'creates a job for a given employer' do
       sign_in_as(employer_user)
-      post :create, params: { employer_id: employer_user.employer.id, job: { title: 'Fun Job', description: 'So super fun!' } }
+      params = {
+        employer_id: employer_user.employer.id,
+        job: { title: 'Fun Job', description: 'So super fun!' },
+      }
+
+      post :create, params: params
 
       expect(response).to redirect_to(employer_path(employer_user.id))
     end
