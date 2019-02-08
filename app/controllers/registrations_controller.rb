@@ -1,9 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     if resource.role == 'applicant'
-      new_applicant_path(user_id: resource.id)
+      new_applicant_path
     elsif resource.role == 'employer'
-      new_employer_path(user_id: resource.id)
+      new_employer_path
     else
       root_path
     end

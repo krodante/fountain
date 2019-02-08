@@ -1,12 +1,14 @@
 class EmployersController < ApplicationController
+  before_action { validate_role('employer', 'applicant') }
+
   def show
-    @employer = Employer.find_by(user_id: params[:id])
+    @employer = Employer.find_by(user_id: current_user.id)
     @jobs = @employer.jobs
     @applications = @employer.applications
   end
 
   def new
-    @user_id = params[:user_id]
+    @user_id = current_user.id
   end
 
   def create

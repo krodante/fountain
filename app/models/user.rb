@@ -6,4 +6,7 @@ class User < ApplicationRecord
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  validates_inclusion_of :role,
+    in: ROLES
 end
