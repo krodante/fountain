@@ -5,7 +5,7 @@ class ApplicantsController < ApplicationController
   end
 
   def new
-    @user_id = params[:user_id]
+    @applicant = Applicant.new(user_id: params[:user_id])
   end
 
   def create

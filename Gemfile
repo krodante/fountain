@@ -21,6 +21,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'capybara'
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'pry'
