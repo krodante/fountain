@@ -3,11 +3,8 @@ class JobsController < ApplicationController
 
   def index
     @jobs = Job.all
-    @employer, @applicant = nil, nil
-    if current_user
-      @employer = current_user.employer
-      @applicant = current_user.applicant
-    end
+    @employer = current_user.employer
+    @applicant = current_user.applicant
   end
 
   def apply
