@@ -1,6 +1,8 @@
 <h2>Create Applicant User</h2>
 
-<%= form_for @applicant, url: { action: "create" }  do |f| %>
+<%= form_for :applicant, url: { action: "create" }  do |f| %>
+  <%= f.hidden_field(:user_id, value: @user_id) %>
+
   <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name, autofocus: true %>

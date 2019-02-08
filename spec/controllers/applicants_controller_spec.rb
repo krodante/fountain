@@ -6,6 +6,8 @@ RSpec.describe ApplicantsController, type: :controller do
   let(:applicant) { create(:applicant) }
   let(:user) { User.find(applicant.user_id) }
 
+  before { sign_in user}
+
   describe 'GET #show' do
     it 'shows the appropriate platform' do
       expect(controller.after_sign_in_path_for(user)).to eq applicant_path(applicant.id)

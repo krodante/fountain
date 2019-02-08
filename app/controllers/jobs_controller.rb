@@ -1,19 +1,20 @@
 class JobsController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
+
   def index
     @jobs = Job.all
+    @employer, @applicant = nil, nil
+    if current_user
+      @employer = current_user.employer
+      @applicant = current_user.applicant
+    end
   end
 
   def apply
     user = User.find(params[:user_id])
 
-    if user.employer
-      puts 'oops'
-      flash[:error] = 'Employers cannot apply for jobs!'
-      redirect_to action: 'index'
-    else
-      Application.create(applicant_id: user.applicant.id, job_id: params[:job_id])
-      redirect_to applicant_path(user.id)
-    end
+    Application.create(applicant_id: user.applicant.id, job_id: params[:job_id])
+    redirect_to applicant_path(user.id)
   end
 
   def new
